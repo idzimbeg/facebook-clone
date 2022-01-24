@@ -1,0 +1,5 @@
+.storyReel {
+    display: flex;
+    flex-direction: row nowrap;
+    margin-left: 60vh;
+}

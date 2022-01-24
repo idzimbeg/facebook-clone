@@ -1,0 +1,74 @@
+/* .feed {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid white;
+    box-shadow: 0px 0px 5px 5px #dedede; 
+    border-radius: 5px;
+    padding: 25px;
+    width: 100vh;
+} */
+.feed {
+    width: 120vh;
+    margin-top: 15px;
+    left: 50vh;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+}
+
+/* feed Top */
+.feedTop {
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 15px;
+}
+.feedAvatar {
+    margin-right: 10px;
+}
+.feedTopInfo h3 {
+    font-size: medium;
+}
+.feedTopInfo p {
+    font-size: small;
+    color: gray;
+}
+
+/* feed Bottom */
+.feedBottom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+}
+
+/* feed Image */
+.feedImage img {
+    width: 100%;
+}
+
+/* feed Options */
+.feedOptions {
+    padding-top: 10px;
+    border-top: 1px solid lightgray;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: medium;
+    color: gray;
+    cursor: pointer;
+    padding: 15px;
+}
+.feedOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    flex: 1;
+}
+.feedOption p {
+    margin-left: 10px;
+}
+.feedOption:hover {
+    background-color: #eff2f5;
+    border-radius: 10px;
+}
