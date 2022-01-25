@@ -1,11 +1,7 @@
 import {
   useEffect,
   useState,
-  useRef,
-  useCallback,
-  useContext,
-  useReducer,
-  createContext,
+  useRef
 } from "react";
 
 export function useFirestoreQuery(query) {
@@ -59,57 +55,3 @@ export function useAuthState(auth) {
 
   return { user, initializing };
 }
-
-export function useLocalStorage(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
-      return initialValue;
-    }
-  });
-
-  const setValue = (value) => {
-    try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return [storedValue, setValue];
-}
-
-export function useMedia(queries, values, defaultValue) {
-  const mediaQueryLists = queries.map((q) => window.matchMedia(q));
-
-  const getValue = useCallback(() => {
-    const index = mediaQueryLists.findIndex((mql) => mql.matches);
-    return typeof values[index] !== "undefined" ? values[index] : defaultValue;
-  }, [mediaQueryLists, values, defaultValue]);
-
-  const [value, setValue] = useState(getValue);
-
-  useEffect(() => {
-    const handler = () => setValue(getValue);
-    mediaQueryLists.forEach((mql) => mql.addListener(handler));
-    return () => mediaQueryLists.forEach((mql) => mql.removeListener(handler));
-  }, [getValue, mediaQueryLists]);
-
-  return value;
-}
-
-export const StateContext = createContext();
-
-export const Provider = ({ reducer, initialState, children }) => (
-  <StateContext.Provider value={useReducer(reducer, initialState)}>
-    {children}
-  </StateContext.Provider>
-);
-
-export const useStateValue = () => useContext(StateContext);

@@ -6,3 +6,4 @@ export const HomeStyle = styled.ul`
    `
 
 
+  

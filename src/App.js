@@ -4,14 +4,15 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
-import { useAuthState } from "./hooks/Hooks";
+import { useAuthState } from "./hooks/hooks";
 
 import Home from "./components/Home/Home";
 
 import classes from "./App.module.css";
 
+
 firebase.initializeApp({
-  apiKey: "AIzaSyC-5edXzqLNXllj_waVsOdkZ0u1NYm4f2g",
+  apiKey:"AIzaSyC-5edXzqLNXllj_waVsOdkZ0u1NYm4f2g",
   authDomain: "facebook-clone-f08e8.firebaseapp.com",
   projectId: "facebook-clone-f08e8",
   storageBucket: "facebook-clone-f08e8.appspot.com",
@@ -44,7 +45,8 @@ function App() {
         <div>
           <h1>facebook</h1>
           <p>
-            Facebook vas povezuje s drugima i olakšava razmjenu informacija.
+          Facebook connects you with others and makes <br/>
+          it easier to share information
           </p>
         </div>
         <div className={classes.card}>

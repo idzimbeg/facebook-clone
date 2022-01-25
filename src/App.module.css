@@ -3,8 +3,8 @@
   height: 100vh;
   display: flex;
   flex: 1 1;
-  flex-direction: column nowrap;
-  justify-content: center;
+  flex-direction: row nowrap;
+  justify-content: space-around;
   align-items: center;
 }
 .appBody {

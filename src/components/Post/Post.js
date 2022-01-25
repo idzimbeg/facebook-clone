@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import firebase from 'firebase/compat/app';
-import { useFirestoreQuery } from '../../hooks/Hooks';
+import { useFirestoreQuery } from '../../hooks/hooks';
+import PropTypes from 'prop-types';
 import Feed from '../Feed/Feed';
 import classes from './Post.module.css';
 import Quotes from '../Quotes/Quotes';
@@ -48,7 +49,7 @@ const Post = ({ user = null }) => {
   return (
     <>
       <form onSubmit={handleOnSubmit} className={classes.post}>
-        <textarea
+        <input
           ref={inputRef}
           type="text"
           value={newMessage}
@@ -70,6 +71,13 @@ const Post = ({ user = null }) => {
       <div ref={bottomListRef} />
     </>
   );
+};
+Post.propTypes = {
+  user: PropTypes.shape({
+    uid: PropTypes.string,
+    displayName: PropTypes.string,
+    photoURL: PropTypes.string,
+  }),
 };
 
 export default Post;

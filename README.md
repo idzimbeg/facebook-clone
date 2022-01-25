@@ -6,6 +6,8 @@ This project was created using Firebase Google authentication for Facebook look 
 
 ## `npm start`
 
+## `npm start`
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
@@ -15,13 +17,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### This App contains 
+## This App contains 
 
-[x] Firebase authentication
-[x] Styled components
-[x] Custom made hooks
-[x] Login form
-[x] Home page with Story Carousel and News Feed
-[x] Rapid Api connection for the Facebook uid
-[x] Firebase storage for dummy data
+### [x] `Firebase authentication`
+### [x] `Styled components`
+### [x] `Custom made hooks`
+### [x] `Login form`
+### [x] `Home page with Story Reel and News Feed`
+### [x] `Rapid Api connection for the Facebook uid`
+### [x] `Firebase storage for dummy data`
 

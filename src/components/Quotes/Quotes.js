@@ -6,6 +6,12 @@ import { FiShare } from "react-icons/fi";
 
 function App() {
   const [responseData, setResponseData] = useState("");
+  const [like, setLike] = useState(0);
+  const [isLike, setIsLike] = useState(false);
+  const toggle = () => {
+    setLike(like + (isLike?-1:1));
+      setIsLike(!isLike);
+  }
 
   const fetchData = useCallback(async () => {
     const URL = "https://quotes15.p.rapidapi.com/quotes/random/";
@@ -50,9 +56,9 @@ function App() {
         </div>
       )}
       <div className={classes.quotesOptions}>
-        <div className={classes.quotesOption}>
+        <div className={classes.quotesOption} onClick={toggle}>
           <FaRegThumbsUp />
-          <p>Like</p>
+          <p>Like | {like}</p>
         </div>
         <div className={classes.quotesOption}>
           <FaRegCommentAlt />

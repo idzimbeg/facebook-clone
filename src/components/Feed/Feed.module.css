@@ -26,6 +26,7 @@
 }
 .feedAvatar {
     margin-right: 10px;
+    border-radius: 50%;
 }
 .feedTopInfo h3 {
     font-size: medium;

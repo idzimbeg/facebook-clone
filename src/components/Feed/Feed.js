@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { formatRelative } from "date-fns";
+import PropTypes from 'prop-types'
 import { BsPersonCircle } from "react-icons/bs";
 import { FaRegThumbsUp, FaRegCommentAlt } from "react-icons/fa";
 import { FiShare } from "react-icons/fi";
@@ -17,12 +18,19 @@ const formatDate = (date) => {
   return formattedDate;
 };
 
+
 const Feed = ({
   createdAt = null,
   text = "",
   displayName = "",
   photoURL = "",
 }) => {
+  const [like, setLike] = useState(0);
+  const [isLike, setIsLike] = useState(false);
+  const toggle = () => {
+    setLike(like + (isLike?-1:1));
+      setIsLike(!isLike);
+  }
   if (!text) return null;
   return (
     <div className={classes.feed}>
@@ -44,9 +52,9 @@ const Feed = ({
       ) : null}
       <p className={classes.feedBottom}>{text}</p>
       <div className={classes.feedOptions}>
-        <div className={classes.feedOption}>
+         <div className={classes.feedOption} onClick={toggle}>
           <FaRegThumbsUp />
-          <p>Like</p>
+          <p>Like | {like}</p>
         </div>
         <div className={classes.feedOption}>
           <FaRegCommentAlt />
@@ -64,6 +72,14 @@ const Feed = ({
       </div>
     </div>
   );
+};
+Feed.propTypes = {
+  text: PropTypes.string,
+  createdAt: PropTypes.shape({
+    seconds: PropTypes.number,
+  }),
+  displayName: PropTypes.string,
+  photoURL: PropTypes.string,
 };
 
 export default Feed;
