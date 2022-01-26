@@ -1,8 +1,4 @@
-import {
-  useEffect,
-  useState,
-  useRef
-} from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function useFirestoreQuery(query) {
   const [docs, setDocs] = useState([]);

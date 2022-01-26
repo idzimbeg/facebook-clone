@@ -1,79 +1,23 @@
 import React from "react";
-
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-
-import { useAuthState } from "./hooks/hooks";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
-import classes from "./App.module.css";
-
-
-firebase.initializeApp({
-  apiKey:"AIzaSyC-5edXzqLNXllj_waVsOdkZ0u1NYm4f2g",
-  authDomain: "facebook-clone-f08e8.firebaseapp.com",
-  projectId: "facebook-clone-f08e8",
-  storageBucket: "facebook-clone-f08e8.appspot.com",
-  messagingSenderId: "16918220334",
-  appId: "1:16918220334:web:e6fc92abc324b841d759bf",
-});
+import './App.css';
 
 function App() {
-  const { user, initializing } = useAuthState(firebase.auth());
-
-  const signIn = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().useDeviceLanguage();
-    try {
-      await firebase.auth().signInWithPopup(provider);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  const renderContent = () => {
-    if (initializing) {
-      return <div>Loading...</div>;
-    }
-
-    if (user) return <Home user={user} />;
-
-    return (
-      <div className={classes.app}>
-        <div>
-          <h1>facebook</h1>
-          <p>
-          Facebook connects you with others and makes <br/>
-          it easier to share information
-          </p>
-        </div>
-        <div className={classes.card}>
-          <input
-            type="email"
-            placeholder="E-mail address"
-            required
-            className={classes.input}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            className={classes.input}
-          />
-          <button onClick={signIn} className={classes.button}>
-            Sign in
-          </button>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div>
       <div style={{ maxHeight: "calc(100% - var(--topbar-height))" }}>
-        {renderContent()}
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/home" element={<Home />} />
+          </Routes>
+        </Router>
       </div>
     </div>
   );

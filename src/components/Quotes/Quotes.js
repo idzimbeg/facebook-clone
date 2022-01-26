@@ -18,9 +18,9 @@ function App() {
     try {
       const response = await fetch(URL, {
         headers: {
-          "x-rapidapi-host": "quotes15.p.rapidapi.com",
-          "x-rapidapi-key":
-            "670625423dmsh38b6d653df87253p14285ejsncf31b895139b",
+          "x-rapidapi-host": process.env.REACT_APP_RAPIDAPI_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY
+            
         },
         params: {
           language_code: "en",

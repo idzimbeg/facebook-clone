@@ -10,7 +10,7 @@ const Story = ({ image, title }) => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,
       }}
     >
-      <SiGravatar  className={classes.storyAvatar} />
+      <SiGravatar className={classes.storyAvatar} />
       <h4>{title}</h4>
     </div>
   );

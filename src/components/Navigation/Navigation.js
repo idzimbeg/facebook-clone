@@ -1,11 +1,12 @@
 import { BsFacebook, BsMessenger, BsPlayBtn } from "react-icons/bs";
 import { FaBell, FaSearch } from "react-icons/fa";
 import { AiOutlineTeam, AiFillHome } from "react-icons/ai";
-import { IoMdSettings } from "react-icons/io";
+import { IoMdSettings, IoMdLogOut } from "react-icons/io";
 import classes from "./Navigation.module.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { logout } from "../firebase/firebase";
 
 const Navigation = (user) => {
   const signOut = async () => {
@@ -54,6 +55,11 @@ const Navigation = (user) => {
           </h1>
         </div>
       ) : null}
+      <div onClick={logout} className={classes.headerOption}>
+        <h1>
+          <IoMdLogOut />
+        </h1>
+      </div>
     </div>
   );
 };
