@@ -1,21 +1,31 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import { auth } from "../../firebase/firebase";
+import { useAuth } from "../../contexts/AuthContext";
+
+import Portal from "../../portal/Portal";
 import { BsFacebook, BsMessenger, BsPlayBtn } from "react-icons/bs";
 import { FaBell, FaSearch } from "react-icons/fa";
 import { AiOutlineTeam, AiFillHome } from "react-icons/ai";
-import { IoMdSettings, IoMdLogOut } from "react-icons/io";
-import classes from "./Navigation.module.css";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-import { logout } from "../firebase/firebase";
+import { IoMdLogOut } from "react-icons/io";
 
-const Navigation = (user) => {
-  const signOut = async () => {
-    try {
-      await firebase.auth().signOut();
-    } catch (error) {
-      console.error(error.message);
-    }
+import classes from "./Navigation.module.css";
+
+const Navigation = () => {
+  const [showModal, setShowModal] = useState(false);
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+     auth.signOut();
+    navigate({ pathname: "/" });
+    return;
   };
+
   return (
     <div className={classes.header}>
       <div className={classes.headerLeft}>
@@ -33,7 +43,13 @@ const Navigation = (user) => {
       </div>
       <div className={classes.headerCenter}>
         <h1>
-          <BsMessenger className={classes.headerOption} />
+          <div
+            onClick={() => setShowModal(true)}
+            className={classes.headerOption}
+          >
+            <BsMessenger />
+          </div>
+          <Portal onClose={() => setShowModal(false)} show={showModal}></Portal>
         </h1>
         <h1>
           <FaBell className={classes.headerOption} />
@@ -49,17 +65,12 @@ const Navigation = (user) => {
         </h1>
       </div>
       {user ? (
-        <div onClick={signOut} className={classes.headerOption}>
+        <div onClick={handleLogout} className={classes.headerOption}>
           <h1>
-            <IoMdSettings />
+            <IoMdLogOut />
           </h1>
         </div>
       ) : null}
-      <div onClick={logout} className={classes.headerOption}>
-        <h1>
-          <IoMdLogOut />
-        </h1>
-      </div>
     </div>
   );
 };

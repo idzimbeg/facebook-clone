@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "../../hooks/hooks";
 import { Link, useNavigate } from "react-router-dom";
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { auth } from "../../firebase/firebase";
+
 import classes from "./Register.module.css";
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from "../firebase/firebase";
+
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const { user, initializing } = useAuthState(auth);
-  const history = useNavigate();
+  const { user } = auth;
+  const navigate = useNavigate();
+  const db = getFirestore();
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
   useEffect(() => {
-    if (initializing) return;
-    if (user) history.replace("/dashboard");
-  }, [user, initializing]);
+    if (user) navigate.replace("/home");
+  }, [user]);
+
+  const registerWithEmailAndPassword = async (name, email, password) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        authProvider: "local",
+        email,
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
 
   return (
     <div className={classes.register}>
+      <h1>Facebook-Clone</h1>
       <div className={classes.register__container}>
         <input
           type="text"
@@ -48,9 +65,6 @@ function Register() {
         />
         <button onClick={register} className={classes.register__btn}>
           Register
-        </button>
-        <button onClick={signInWithGoogle} className={classes.register__btn}>
-          Register with Google
         </button>
         <div>
           Already have an account? <Link to="/">Login</Link>

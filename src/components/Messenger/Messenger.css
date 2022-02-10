@@ -1,0 +1,32 @@
+.ce-chats-container {
+  background-color: #dedede !important;
+}
+.ce-chat-feed-column {
+  background-color: #dedede !important;
+}
+
+.ce-settings {
+  background-color: #dedede !important;
+  border-radius: 0px 0px 24px 24px !important;
+}
+
+.ce-chat-title-text {
+  color: black !important;
+}
+.ce-chat-card {
+  background-color: white !important;
+}
+.ce-active-chat-card {
+  background-color: #2e81f4 !important;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+@media (max-width: 861px) {
+  .ce-chat-form-container {
+    color: transparent;
+  }
+}
